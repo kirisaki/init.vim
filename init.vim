@@ -13,6 +13,7 @@ Plug 'neovimhaskell/haskell-vim'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " colorscheme
 Plug 'kirisaki/sweet-lolita'
@@ -49,7 +50,7 @@ set expandtab
 set shiftwidth=4
 set smartindent
 set list
-set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+set listchars=tab:\|\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set nrformats-=octal
 set hidden
 set history=50
@@ -61,6 +62,17 @@ autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
 autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
 autocmd FileType typescript  setlocal sw=2 sts=2 ts=2 et
 autocmd FileType typescript.tsx  setlocal sw=2 sts=2 ts=2 et
+autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+
+" haskell
+let g:haskell_indent_disable = 1
+
+" go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " vim-racer
 set hidden
