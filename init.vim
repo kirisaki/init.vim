@@ -14,6 +14,13 @@ Plug 'hashivim/vim-terraform'
 Plug 'vim-syntastic/syntastic'
 Plug 'juliosueiras/vim-terraform-completion'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'joshglendenning/vim-caddyfile'
+Plug 'JuliaEditorSupport/julia-vim'
+Plug 'purescript-contrib/purescript-vim'
+Plug 'kylelaker/riscv.vim'
+Plug 'qnighy/satysfi.vim'
+" Plug 'neovim/nvim-lsp'
+" Plug 'neovim/nvim-lspconfig'
 
 " colorscheme
 Plug 'kirisaki/sweet-lolita'
@@ -63,6 +70,7 @@ autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
 autocmd FileType typescript  setlocal sw=2 sts=2 ts=2 et
 autocmd FileType typescript.tsx  setlocal sw=2 sts=2 ts=2 et
 autocmd FileType yaml setlocal sw=2 sts=2 ts=2 et
+autocmd BufRead,BufNewFile *.jl :set filetype=julia
 
 " haskell
 let g:haskell_indent_disable = 1
@@ -73,6 +81,27 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
+" Julia
+function! Exe()
+  echo "Exe"
+  let filename = expand('%:t')
+  if stridx(filename, ".py") != -1 
+    !python %
+  elseif stridx(filename, ".jl") != -1
+    !julia %
+  elseif stridx(filename, ".cpp") != -1 
+    !./build_run.sh
+  else
+    echo "unknown filetype"+filename
+  endif
+endfunction
+command! Exe :call Exe()
+nmap <F5> :Exe
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " vim-racer
 set hidden
